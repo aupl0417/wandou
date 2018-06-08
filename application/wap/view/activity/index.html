@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>豌豆吧</title>
+		<link href="__STATIC__/wap/css/bootstrap.min.css" rel="stylesheet">	<!--框架样式-->
+		<link rel="stylesheet" href="__STATIC__/wap/css/rem.css">				<!--公共样式-->
+		<link href="__STATIC__/wap/css/style1.css" rel="stylesheet">			<!--整体样式-->
+
+	</head>
+
+	<body style="background-color: #ffa03c">
+
+	<div class="centent_640" style="padding-bottom: 10px;">
+		<div class="lzx-wdb-banner lzx-amg">
+			<img src="__STATIC__/wap/images/banner-img.jpg" alt="">
+		</div>
+
+		<div class="lzx-wdb-cont">
+			<div class="lzx-wdb-notice">
+				<div class="lzx-amg re">
+					<img src="__STATIC__/wap/images/gg-img.png" alt="">
+					<a href='http://wandouba.com:8001/app/Download.html' class="lzx-wdb-down-btn" href=""><img src="__STATIC__/wap/images/down-wdb-btn.png" alt=""></a>
+
+				</div>
+			</div>
+
+			<div class="pd10 lzx-wdb-mid over pt0">
+				{notempty name='wallet'}
+				<div class="lzx-amg">
+					<img src="__STATIC__/wap/images/wds-ranking.png" alt="" class="">
+				</div>
+				<div class="lzx-list-div">
+					<!--豌豆数排名开始-->
+					<table class="table lzx-list-table">
+						<tbody>
+
+							{foreach name='wallet' item='vo' key='k'}
+							<tr>
+								<td class="div1 text-center">{$k + 1}</td>
+								<td class="div2">
+									{if condition='$k eq 0'}
+									<img src="__STATIC__/wap/images/dz.png" alt="" width="25" class="bor_r50 rmr5">
+									<img src="__STATIC__/wap/images/jin.png" alt="" width="15">
+									{elseif condition='$k eq 1'/}
+									<img src="__STATIC__/wap/images/nm.png" alt="" width="25" class="bor_r50 rmr5">
+									<img src="__STATIC__/wap/images/yin.png" alt="" width="15">
+									{elseif condition='$k eq 2'/}
+									<img src="__STATIC__/wap/images/pn.png" alt="" width="25" class="bor_r50 rmr5">
+									<img src="__STATIC__/wap/images/tong.png" alt="" width="15">
+									{/if}
+								</td>
+								<td class="div3">{$vo.username}</td>
+								<td class="div4">{$vo.total}豆</td>
+							</tr>
+							{/foreach}
+
+						</tbody>
+					</table>
+					<!--豌豆数排名结束-->
+
+					<div class="text-right rfs14 rpt10 rpb20 c_dba">以上排行截止至{$date}</div>
+				</div>
+				{/notempty}
+				{notempty name='data'}
+				<div class="lzx-amg">
+					<img src="__STATIC__/wap/images/js-ranking.png" alt="" class="">
+				</div>
+				<div class="lzx-list-div">
+					<!--豌豆数排名开始-->
+					<table class="table lzx-list-table lzx-table-div2">
+						<tbody>
+
+						{foreach name='data' item='vo' key='k'}
+						<tr>
+							<td class="div1 text-center">{$k + 1}</td>
+							<td class="div2">
+								{if condition='$k eq 0'}
+								<img src="__STATIC__/wap/images/dz.png" alt="" width="25" class="bor_r50 rmr5">
+								<img src="__STATIC__/wap/images/jin.png" alt="" width="15">
+								{elseif condition='$k eq 1'/}
+								<img src="__STATIC__/wap/images/nm.png" alt="" width="25" class="bor_r50 rmr5">
+								<img src="__STATIC__/wap/images/yin.png" alt="" width="15">
+								{elseif condition='$k eq 2'/}
+								<img src="__STATIC__/wap/images/pn.png" alt="" width="25" class="bor_r50 rmr5">
+								<img src="__STATIC__/wap/images/tong.png" alt="" width="15">
+								{/if}
+							</td>
+							<td class="div3">{$vo.UserName}</td>
+							<td class="div4">{$vo.playcount}局</td>
+						</tr>
+						{/foreach}
+
+						</tbody>
+					</table>
+					<!--豌豆数排名结束-->
+					<div class="text-right rfs14 rpt10 rpb20 c_dba">以上排行截止至{$date}</div>
+				</div>
+				{/notempty}
+			</div>
+
+		</div>
+		<div class="lzx-wdb-footer">
+			<div class="lzx-amg re" style="    margin-top: -20px;">
+				<img src="__STATIC__/wap/images/wdb-footer-bg.png" alt="">
+				<a id="lottery" class="lzx-footer-btn"><img src="__STATIC__/wap/images/award-btn.png" alt=""></a>
+
+			</div>
+		</div>
+
+	</div>
+
+
+	<script src="__STATIC__/wap/js/html_size.js"></script>
+	<script src="__STATIC__/wap/js/jquery.min.js"></script>
+	<script src="__STATIC__/wap/js/bootstrap.min.js"></script>
+	<script src="__STATIC__/wap/js/layer/layer.js"></script>
+	<script>
+
+		$('#lottery').on('click', function () {
+            layer.open({
+                content: '请前往豌豆吧APP"商城-兑换-活动抽奖"进行领奖'
+                ,btn: 'OK'
+            });
+        });
+
+	</script>
+	</body>
+</html>

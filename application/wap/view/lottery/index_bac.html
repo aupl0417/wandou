@@ -1,0 +1,91 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="__STATIC__/wap/css/redPacket.css">
+    <style type="text/css">
+    </style>
+    <script type="text/javascript" src="__STATIC__/wap/js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".pop_redPacket").click(function(){
+                $(this).addClass("shake");
+                $(".separate_img").removeClass("separate_shake")
+                setTimeout(function(){
+                    $(".pop_redPacket").removeClass("shake");
+                    $(".separate_img").addClass("separate_shake")
+                },2000);
+                setTimeout(function(){
+                    $(".pop_redPacket").hide();
+                    $(".pop_redPacket_bg").fadeIn();
+                    $(".pop_redPacket_draw").fadeIn();
+                    $(".pop_redPacket_tips").fadeIn();
+                },4000)
+            });
+
+            $(".redPacket_draw_con_close img").click(function(){
+                $(".pop_redPacket_bg").fadeOut();
+                $(".pop_redPacket_draw").fadeOut();
+                $(".pop_redPacket_tips").fadeOut();
+            })
+
+        });
+    </script>
+</head>
+<body>
+<div class="pop_redPacket_bg" style="display:block"></div>
+<div class="pop_redPacket">
+    <img src="__STATIC__/wap/images/pop_landlords_bg01.png" class="redPacket_bg">
+    <div class="separate_btn">
+        <img src="__STATIC__/wap/images/pop_landlords_kai.png" alt="" class="separate_img">
+    </div>
+</div>
+<div class="pop_redPacket_draw">
+    <img src="__STATIC__/wap/images/pop_landlords_bg02.png" class="redPacket_bg">
+    <div class="pop_redPacket_draw_con">
+        <div class="redPacket_draw_con_close">
+            <img src="__STATIC__/wap/images/pop_landlords_close.png" alt="">
+        </div>
+        <div class="pop_redPacket_draw_con_t">
+            <span>恭喜您，中奖啦</span>
+        </div>
+        <div class="pop_redPacket_draw_con_f">
+            <span id="bonus">5.88</span>
+        </div>
+        <div class="pop_redPacket_draw_con_bt">
+            <a href="{:url('Lottery/index', ['id' => $id])}"><img src="__STATIC__/wap/images/pop_landlords_again.png" alt=""></a>
+        </div>
+    </div>
+</div>
+<div class="pop_redPacket_tips">
+    <span>温馨提示：工作人员会在7个工作日内，将中奖现金派发到您的大唐天下现金账户</span>
+</div>
+</body>
+<script src="__STATIC__/wap/js/layer/layer.js"></script>
+<script>
+    $('.separate_btn').click(function () {
+        var url = "{:url('Lottery/lotteryDraw', ['id' => $id])}";
+        $.ajax({
+            type:'get',
+            url : url,
+            dataType:'json',
+            success:function(result){
+                if(result.code == 200){
+                    $('#bonus').text(result.data.bonus);
+                }else{
+                    layer.open({
+                        content: result.data
+                        ,btn: 'OK'
+                    });
+                }
+            }
+        });
+    });
+//    $('.redPacket_draw_con_close').click(function () {
+//        window.location.reload();
+//    });
+</script>
+</html>

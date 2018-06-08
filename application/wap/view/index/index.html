@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>豌豆兑换中心</title>
+    <meta http-equiv = "X-UA-Compatible" content = "IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.6, maximum-scale=0.6, user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	　<!--[if lt IE 9]>
+　　　　<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+　　<![endif]-->
+	<script src="__STATIC__/wap/js/flexible.js"></script>
+    <link rel="stylesheet" href="__STATIC__/wap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__STATIC__/wap/css/css.css?{:time()}">
+</head>
+<body class="game-box2 duihuan" >
+    <div class="over pd10">
+        <div class="game-mid note-mid">
+            <form action="">
+                <div class="game-form-box duihuanwe pl0">
+                    <div class="tab-content over">
+                        <div class="block-title">
+                            <ul class="nav nav-tabs pt9" data-toggle="tabs">
+                                <li class="{eq name='cid' value='0' }active{/eq} menu" data-id="0"><a href="#example-tabs2-activity" class="c_black" data-toggle="tab">实物大奖</a></li>
+                                <li class="{eq name='cid' value='1' }active{/eq} menu" data-id="1"><a href="#example-tabs2-profile" class="c_black" data-toggle="tab">话费流量</a></li>
+                                <li class="{eq name='cid' value='2' }active{/eq} menu" data-id="2"><a href="#example-tabs3-profile" class="c_black" data-toggle="tab">唐人街购物券</a></li>
+                                <li class=""><a href="#example-tabs3-activity" data-url="{:url('Activity/lottery')}" class="c_black lotteryActivity" data-toggle="tab">活动抽奖</a></li>
+                                <li class=""><a href="#example-tabs4-profile" data-url="{:url('Exchange/records')}" class="c_black records" data-toggle="tab">兑换记录</a></li>
+                                <li class=""><a href="#example-tabs5-profile" data-url="{:url('Address/index')}" class="c_black address" data-toggle="tab">收货地址</a></li>
+                            </ul>
+                        </div>
+                        <!--实物大奖-->
+                        <div class="tab-pane {eq name='cid' value='0' }active{/eq}" id="example-tabs2-activity">
+                           <ul class="box reset-txt">
+                               {foreach $realGoods as $vo}
+                               <li class="boxli">
+                                   <img src='{$vo.Image|default="__STATIC__/wap/images/shophone.png"}' alt="" class="mt10 mb10 boximg" />
+                                   <p class="textColor2 fs24">{$vo.Name}</p>
+                                   <p class="textColor3 fs16 stock">奖品数量：{$vo.Stock}</p>
+                                   <!--<input type="button"  class="mb10 boxliBtn boxliBtnS1 textColor1 inchargeMobile {if condition='$userInfo.WalletMoney < $vo.SoldPrice'}Receive noMoney {else/} realGoods {/if}" id="{$vo.ID}" data-id="{$vo.ID}" value="{$vo.SoldPrice}豆" />-->
+                                   <input type="button"  class="mb10 boxliBtn boxliBtnS1 textColor1 inchargeMobile {if condition='$userInfo.WalletMoney < $vo.SoldPrice and $vo.Stock > 0'} noMoney {elseif condition='$vo.Stock <= 0'} Receive noStock {else/} realGoods {/if}" id="{$vo.ID}" data-id="{$vo.ID}" value="{$vo.SoldPrice}豆" />
+                               </li>
+                               {/foreach}
+                           </ul>
+                        </div>
+
+                        <!--话费/流量-->
+                        <div class="tab-pane {eq name='cid' value='1' }active{/eq}" id="example-tabs2-profile">
+                            <ul class="box reset-txt">
+                                {foreach $mobileFee as $vo}
+                                <li class="boxli">
+                                    <img src="{$vo.Image|default='__STATIC__/wap/images/hf-1.png'}" alt="" class="mt10 mb10 boximg" />
+                                    <p class="textColor2 fs24">{$vo.Name}</p>
+                                    <p class="textColor3 fs16 stock">奖品数量：{$vo.Stock}</p>
+                                    <input type="button"  class="mb10 boxliBtn boxliBtnS2 textColor1 inchargeMobile {if condition='$userInfo.WalletMoney < $vo.SoldPrice and $vo.Stock > 0'} noMoney {elseif condition='$vo.Stock <= 0'} Receive noStock {else/} mobileFee {/if}" id="{$vo.ID}" data-id="{$vo.ID}" value="{$vo.SoldPrice}豆" />
+                                </li>
+                                {/foreach}
+                            </ul>
+                        </div>
+
+                        <!--唐人街购物券-->
+                        <div class="tab-pane {eq name='cid' value='2' }active{/eq}" id="example-tabs3-profile">
+                            <ul class="box reset-txt">
+                                {foreach $coupon as $vo}
+                                <li class="boxli">
+                                    <img src="{$vo.Image|default='__STATIC__/wap/images/juan.png'}" alt="" class="mt10 mb10 boximg" />
+                                    <p class="textColor2 fs24 ticket">{$vo.Name}</p>
+                                    <p class="textColor3 fs16 stock">奖品数量：{$vo.Stock}</p>
+                                    <input type="button" class="mb10  textColor1 boxliBtn3 inchargeMobile {if condition='$userInfo.WalletMoney < $vo.SoldPrice and $vo.Stock > 0'} noMoney {elseif condition='$vo.Stock <= 0'} Receive noStock {else/} buyTicket {/if}" id="{$vo.ID}" data-id="{$vo.ID}" value="{$vo.SoldPrice}豆" />
+                                </li>
+                                {/foreach}
+                            </ul>
+                        </div>
+
+                        <!--兑换记录-->
+                        <div class="tab-pane overhiden" id="example-tabs4-profile">
+
+                        </div>
+                        <!--兑换记录-->
+
+                        <!--收货地址-->
+                        <div class="tab-pane overhiden" id="example-tabs5-profile" >
+
+                        </div>
+                        <!--实物大奖-->
+                        <div class="tab-pane overhiden" id="example-tabs3-activity">
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--尾部-->
+    <div class="footer">
+        温馨提示：兑换订单提交后，工作人员会在7个工作日内处理，请关注！   客服电话：020-87006011    客服QQ：3425083748
+    </div>
+
+    <!-- 模态框（Modal）:确认兑换-->
+    <div class="modal fade" id="myModal8" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 100%;">
+            <div class="modal-content zpmodalbg">
+                <div class="game-form-box pt20 set-box bg1  bor_r6 pd10 text-center top35" >
+                    <div class="row mg0 over mt15">
+                            <div class="pr0 text-left set-text line38 pull-left" style="width: 100%;text-align: center">
+                                确认兑换  <span class="modal8-juan">“易伯淘 满150 减100购物劵”？</span>
+                            </div>
+                    </div>
+                </div>
+                <div class="modal-footer text-center" style="border:none">
+                    <input type="button"  class="mt10 boxliBtnC textColor4" value="关闭"  data-dismiss="modal"/>
+                    &nbsp;&nbsp; &nbsp;&nbsp;
+                    <input type="button"  class="mt10 boxliBtn2 textColor1 modalbtnS8" value="确定"  />
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- 模态框（Modal）:实物大奖-收货地址 -->
+    <div class="modal fade" id="myModal7" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" style="width: 100%;">
+            <div class="modal-content zpmodalbg" >
+               <div class="game-form-box pt20 set-box bg1 top35  bor_r6 pd10 text-center njk"  >
+                  <div class="game-form-box">
+                    <div class="row mg0 ">
+                        <div class="pr0 text-left set-text line38 pull-left" style="width: 100%;">
+                            请确认收货地址
+                        </div>
+                    </div>
+                    <div class="row mg0 ">
+                        <div class="pr0 text-left set-text line38 pull-left">
+                            真实姓名
+                        </div>
+                        <div class="pull-left pl0" style="width: 60%">
+                            <input type="text" class="form-control bor_r6" name="username" value="{$address.UserName}" placeholder="请输入您的姓名">
+                        </div>
+                    </div>
+                    <div class="row mg0 ">
+                        <div class="pr0 text-left set-text line38 pull-left">
+                            手机号码
+                        </div>
+                        <div class="pull-left pl0" style="width: 60%">
+                            <input type="text" class="form-control bor_r6" name="mobile" value="{$address.Mobile}" placeholder="请输入手机号码">
+                            <input type="hidden" name="goodsId" value="">
+                        </div>
+                    </div>
+                    <div class="row mg0 ">
+                        <div class="pr0 text-left set-text line38 pull-left">
+                        详细地址
+                        </div>
+                        <div class="pull-left pl0" style="width: 60%">
+                            <input class="form-control bor_r6" name="Address" value="{$address.Address}" placeholder="例如：xx省xx市xx路xx号xx小区xx号">
+                        </div>
+                    </div>
+
+                    </div>
+               </div>
+                <div class="modal-footer text-center" style="border:none">
+                    <input type="button"  class="mt10 boxliBtnC textColor14 modalbtnS2" value="关闭"  data-dismiss="modal"/>
+                    &nbsp;&nbsp; &nbsp;&nbsp;
+                    <input type="button" id="note-btn" class="mt10 textColor1 modalbtnS7" value="保存" />
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- 模态框（Modal）:兑换成功 -->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 100%;">
+            <div class="modal-content zpmodalbg">
+
+               <div class="game-form-box pt20 set-box bg1 top35 bor_r6 pd10 text-center" >
+                    <p class="mt35">兑换成功</p>
+                    <p class="mt35" style="font-size: 16px">请在“<span class="textColor2">唐人街-个人中心-我的抵用券</span>”中查看.</p>
+                </div>
+                <div class="modal-footer text-center" style="border:none">
+                    <input type="button"  class="mt10 boxliBtn2 textColor1 modalbtnS2" value="关闭"  data-dismiss="modal"/>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+
+    <!-- 模态框（Modal）:兑换失败 -->
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 100%;">
+            <div class="modal-content zpmodalbg">
+               <div class="game-form-box pt20 set-box bg1 top35 bor_r6 pd10 text-center">
+                  <div class="mt80 tetmoal top35">兑换失败，请重新提交。</div>
+                </div>
+                <div class="modal-footer text-center" style="border:none">
+                    <input type="button"  class="mt10 boxliBtn2 textColor1 modalbtnS3" value="关闭"  data-dismiss="modal"/>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <!-- 模态框（Modal）:充值 -->
+    <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 100%;">
+            <div class="modal-content zpmodalbg">
+               <div class="game-form-box pt20 set-box bg1  bor_r6 pd10 text-center top35" >
+                    <div class="row mg0 over mt15">
+                        <div class="pr0 text-left set-text line38 pull-left" style="width: 100%;">
+                            请确认充值手机号码
+                        </div>
+                    </div>
+                    <div class="row mg0 over">
+                            <div class="pr0 text-left set-text set-text2 line38 pull-left" >
+                                手机号码
+                            </div>
+                            <div class="pull-left pl0" style="width: 60%">
+                                <input type="number" class="form-control bor_r6" name="Mobile" value="{$address.Mobile}" placeholder="请输入手机号码">
+                                <input type="hidden" name="goodsId" value="">
+                                <div style="height: 25px;margin-top: 3px;" class="fs14 c-f92"></div>
+                            </div>
+                    </div>
+                </div>
+                <div class="modal-footer text-center" style="border:none">
+                    <input type="button"  class="mt10 boxliBtnC textColor4" value="关闭"  data-dismiss="modal"/>
+                    &nbsp;&nbsp; &nbsp;&nbsp;
+                    <input type="button"  class="mt10 boxliBtn2 textColor1 modalbtnS4" value="确定"  />
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- 模态框（Modal）:温馨提示-->
+    <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 100%;">
+            <div class="modal-content zpmodalbg">
+               <div class="game-form-box pt20 set-box bg1 top35 bor_r6 pd20 text-center pd10" >
+                    <div class="row mg0 mt15">
+                        <div class="pr0 text-left set-text line38 pull-left text-center" style="width: 100%;">
+                            温馨提示
+                        </div>
+                    </div>
+                    <div class="row mg0" style="margin-top: 0.3rem;">
+                           <p class="tetmoal text-left pl20 pr20  text-center" style="font-size: 0.3rem" >很抱歉，兑奖失败！</p>
+                            <p class="tetmoal text-left pl20 pr20  text-center" style="font-size: 0.3rem;margin-top: 20px;">您的豌豆数量不足, 请前往大厅-兑换中心-购买充值豌豆。</p>
+                    </div>
+                </div>
+                <div class="modal-footer text-center" style="border:none">
+                    <input type="button"  class="mt10 boxliBtn2 textColor1 modalbtnS5" value="确定"  data-dismiss="modal"/>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <!-- 模态框（Modal）:订单详情 -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 100%;">
+            <div class="modal-content zpmodalbg shouhuo" id="detail-modal">
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- 模态框（Modal）:兑换失败 -->
+    <div class="modal fade" id="myModal10" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 100%;">
+            <div class="modal-content zpmodalbg">
+                <div class="game-form-box pt20 set-box bg1 top35 bor_r6 pd10 text-center">
+                    <div class="mt80 tetmoal top35" style="font-size:12px;">兑换失败，请重新提交。</div>
+                </div>
+                <div class="modal-footer text-center" style="border:none">
+                    <input type="button"  class="mt10 boxliBtn2 textColor1 modalbtnS3" value="关闭"  data-dismiss="modal"/>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+</body>
+<script src="__STATIC__/wap/js/jquery.min.js"></script>
+<script src="__STATIC__/wap/js/bootstrap.min.js"></script>
+<!--<script src="__STATIC__/wap/js/hp.js"></script>-->
+<script>
+    $('.modal').on('touchmove', function(event) {
+        event.preventDefault();
+    });
+
+    // 话费流量
+    $(".mobileFee").click(function(){
+        var $obj = $(this);
+        //手机充值
+        $('#myModal4').modal('show');
+    })
+
+    //实物大奖
+    $('.inchargeMobile').on('click', function () {
+        var id = $(this).data('id');
+        $("input[name='goodsId']").val(id);
+    });
+
+    $(".modalbtnS7").click(function(){
+        $('#myModal7').modal('hide');
+        var id     = $("input[name='goodsId']").val();
+        var mobile = $("input[name='mobile']").val();
+        var username = $("input[name='username']").val();
+        var Address  = $("input[name='Address']").val();
+        var cls = $('#' + id).prev();
+//        console.log(cls);return false;
+        $.ajax({
+            type:'post',
+            data: { mobile : mobile, id : id, username : username, Address : Address},
+            url : "{:url('Exchange/makeorder')}",
+            dataType:'json',
+            success:function(result){
+                console.log(result);
+                if(result.code == 200){
+                    $('#myModal3 .tetmoal').text("订单已提交，请耐心等待收货");
+                    $('#myModal3').modal('show');
+                    cls.html('奖品数量：' + result.data.stock);
+                }else if(result.code == 203){
+                    $('#myModal5').modal('show');
+                }else{
+                    $('#myModal3 .tetmoal').text(result.data);
+                    $('#myModal3').modal('show');
+                }
+//                setTimeout(function () {
+//                    window.location.reload();
+//                }, 2000);
+            }
+        });
+    })
+
+    $(".realGoods").click(function () {
+        $('#myModal7').modal('show');
+    });
+
+    $('.noMoney').click(function () {
+        $('#myModal5').modal('show');
+    });
+
+    $('.noStock').click(function () {
+        $('#myModal3 .tetmoal').text("库存不足");
+        $('#myModal3').modal('show');
+    });
+
+
+    //唐人街
+    $(".buyTicket").click(function () {
+        var title = $(this).parent().find('.ticket').html();
+        $('.modal8-juan').html('“' + title + '”？');
+        $('#myModal8').modal('show');
+        /*$(".modalbtnS8").click(function(){
+            $('#myModal8').modal('hide');
+            //手机充值
+            $('#myModal4').modal('show');
+        })*/
+    });
+
+    //唐人街及话费/流量 时触发
+    $(".modalbtnS4").click(function(){
+        $('#myModal4').modal('hide');
+        var id     = $("input[name='goodsId']").val();
+        var mobile = $("input[name='Mobile']").val();
+        var cls = $('#' + id).prev();
+
+        $.ajax({
+            type:'post',
+            data: { mobile : mobile, id : id},
+            url : "{:url('Exchange/makeorder')}",
+            dataType:'json',
+            success:function(result){
+                if(result.code == 200){
+                    $('#myModal3 .tetmoal').text("订单已提交，请耐心等待后台处理");
+                    $('#myModal3').modal('show');
+                    cls.html('奖品数量：' + result.data.stock);
+                }else if(result.code == 203){
+                    $('#myModal5').modal('show');
+                }else{
+                    $('#myModal3 .tetmoal').text(result.data);
+                    $('#myModal3').modal('show');
+                }
+//                setTimeout(function () {
+//                    window.location.reload();
+//                }, 2000);
+            }
+        });
+    })
+
+    $(".modalbtnS8").click(function(){
+        $('#myModal8').modal('hide');
+//        $('#myModal4').modal('hide');
+        var id     = $("input[name='goodsId']").val();
+//        var mobile = $("input[name='Mobile']").val();
+        var cls = $('#' + id).prev();
+
+        $.ajax({
+            type:'post',
+            data: { id : id},
+            url : "{:url('Exchange/makeorder')}",
+            dataType:'json',
+            success:function(result){
+                if(result.code == 200){
+//                    $('#myModal2 .tetmoal').text("订单已提交，请耐心等待后台处理");
+                    $('#myModal2').modal('show');
+                    cls.html('奖品数量：' + result.data.stock);
+                }else if(result.code == 203){
+                    $('#myModal5').modal('show');
+                }else{
+                    $('#myModal3 .tetmoal').text(result.data);
+                    $('#myModal3').modal('show');
+                }
+//                setTimeout(function () {
+//                    window.location.reload();
+//                }, 2000);
+            }
+        });
+    })
+
+    $('.records').click(function () {
+        var url = $(this).data('url');
+        $.post(url, function (html) {
+            $('#example-tabs4-profile').html(html);
+        });
+    });
+    $('.address').click(function () {
+        var url = $(this).data('url');
+        $.post(url, function (html) {
+            $('#example-tabs5-profile').html(html);
+        });
+    });
+
+    $('.lotteryActivity').click(function () {
+        var url = $(this).data('url');
+
+        $.post(url, function (html) {
+            $('#example-tabs3-activity').html(html);
+        });
+    });
+</script>
+</html>

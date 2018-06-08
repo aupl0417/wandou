@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>豌豆吧</title>
+		<link href="__STATIC__/wap/css/bootstrap.min.css" rel="stylesheet">	<!--框架样式-->
+		<link rel="stylesheet" href="__STATIC__/wap/css/rem.css">				<!--公共样式-->
+		<link href="__STATIC__/wap/css/style.css" rel="stylesheet">			<!--整体样式-->
+
+	</head>
+
+	<body style="background-color: #ffa03c">
+
+	<div class="centent_640" style="padding-bottom: 10px;">
+		<div class="lzx-wdb-banner lzx-amg">
+			<img src="__STATIC__/wap/images/banner-img-9999.jpg" alt="">
+		</div>
+
+		<div class="lzx-wdb-cont">
+			<div class="lzx-wdb-notice">
+				<div class="lzx-amg re pd10 lzx-wdb-mid">
+					<div class="lzx-wdb-gg">
+						<div class="fs18rem mb20 text-center"><strong>大唐人自己的游戏平台-豌豆吧，又送大礼啦！！！</strong></div>
+						<p class="fs14rem rline26">
+							1、在12月期间，首次充值豌豆任意金额，获得1次抽999现金红包资格。<br/>
+							2、在12月期间，充值豌豆满19元，获得1次抽4999现金红包资格。<br/>
+							3、在12月期间，充值豌豆满199元，获得1次抽9999现金红包资格。<br/>
+							4、在12月31日24时，豌豆数前20名，获得1次抽4999现金红包资格。<br/>
+							5、在12月上旬（12月1日到12月10日），游戏局数前20名，获得1次，抽4999资格。<br/>
+							6、在12月中旬（12月11日到12月20日），游戏局数前20名，获得1次，抽4999资格。<br/>
+							7、在12月下旬（12月21日到12月31日），游戏局数前20名，获得1次，抽4999资格。
+						</p>
+					</div>
+
+
+
+					<!--<img src="images/gg-img.png" alt="">-->
+					<a class="lzx-wdb-down-btn" href="http://wandouba.com:8001/app/Download.html"><img src="__STATIC__/wap/images/down-wdb-btn2.png" alt="" style="width: 3.5rem"></a>
+
+				</div>
+			</div>
+
+			<div class="pd10 lzx-wdb-mid over pt0">
+				{notempty name='data'}
+				<!-- 游戏局数排名 -->
+				<div class="lzx-amg ">
+					<img src="__STATIC__/wap/images/js-ranking.png" alt="" class="">
+				</div>
+				<div class="lzx-list-div" style="padding-bottom: 5px">
+					<!--游戏局排名开始-->
+					<table class="table lzx-list-table lzx-table-div2">
+						<tbody>
+
+						{foreach name='data' item='vo' key='k'}
+						<tr>
+							<td class="div1 text-center">{$k + 1}</td>
+							<td class="div2">
+								{if condition='$k eq 0'}
+								<img src="__STATIC__/wap/images/dz.png" alt="" width="25" class="bor_r50 rmr5">
+								<img src="__STATIC__/wap/images/jin.png" alt="" width="15">
+								{elseif condition='$k eq 1'/}
+								<img src="__STATIC__/wap/images/nm.png" alt="" width="25" class="bor_r50 rmr5">
+								<img src="__STATIC__/wap/images/yin.png" alt="" width="15">
+								{elseif condition='$k eq 2'/}
+								<img src="__STATIC__/wap/images/pn.png" alt="" width="25" class="bor_r50 rmr5">
+								<img src="__STATIC__/wap/images/tong.png" alt="" width="15">
+								{/if}
+							</td>
+							<td class="div3">{$vo.UserName}</td>
+							<td class="div4">{$vo.playcount}局</td>
+						</tr>
+						{/foreach}
+
+						</tbody>
+					</table>
+					<!--豌豆数排名结束-->
+					<div class="text-left rfs14 rpt10 rpb10 c_dba pull-right">以上排名起止时间为：{$startTime}--{$endTime}</div>
+				</div>
+				{/notempty}
+
+				{notempty name='wallet'}
+				<!-- 豌豆数排名 -->
+
+				<div class="lzx-amg" style="margin-top: 1.2rem">
+					<img src="__STATIC__/wap/images/wds-ranking.png" alt="" class="">
+				</div>
+				<div class="lzx-list-div">
+					<!--豌豆数排名开始-->
+					<table class="table lzx-list-table">
+						<tbody>
+
+						{foreach name='wallet' item='vo' key='k'}
+							<tr>
+								<td class="div1 text-center">{$k + 1}</td>
+								<td class="div2">
+									{if condition='$k eq 0'}
+									<img src="__STATIC__/wap/images/dz.png" alt="" width="25" class="bor_r50 rmr5">
+									<img src="__STATIC__/wap/images/jin.png" alt="" width="15">
+									{elseif condition='$k eq 1'/}
+									<img src="__STATIC__/wap/images/nm.png" alt="" width="25" class="bor_r50 rmr5">
+									<img src="__STATIC__/wap/images/yin.png" alt="" width="15">
+									{elseif condition='$k eq 2'/}
+									<img src="__STATIC__/wap/images/pn.png" alt="" width="25" class="bor_r50 rmr5">
+									<img src="__STATIC__/wap/images/tong.png" alt="" width="15">
+									{/if}
+								</td>
+								<td class="div3">{$vo.username}</td>
+								<td class="div4">{$vo.total}豆</td>
+							</tr>
+						{/foreach}
+
+						</tbody>
+					</table>
+					<div class="text-left rfs14 rpb10 c_dba mt15 pull-right" style="float:left;">以上排名截止至：{$endTime}</div>
+
+					<!--豌豆数排名结束-->
+					<div class="text-right rfs14 rpb10 c_dba mt10 pull-right" style="float: left;">（本活动最终解释权归本公司所有）</div>
+				</div>
+				{/notempty}
+			</div>
+
+		</div>
+		<div class="lzx-wdb-footer">
+			<div class="lzx-amg re" style="">
+				<img src="__STATIC__/wap/images/wdb-footer-bg.png" alt="">
+				<a href="javascript:void(0)" class="lzx-footer-btn" id="lottery" style="left: 24%"><img src="__STATIC__/wap/images/award-btn21.png" alt=""></a>
+				<a href="javascript:void(0)" data-url="{:url('Activity/index', ['id' => $preId])}" class="lzx-footer-btn" id="redEnvelopes" style="left: 75%"><img src="__STATIC__/wap/images/award-btn-right1.png" alt=""></a>
+
+			</div>
+		</div>
+		<!--<div class="lzx-hongbao">-->
+			<!--<div class="lzx-chai-hongbao" id="redEnvelopes"><span>开</span></div>-->
+		<!--</div>-->
+		<!--<div class="lzx-black-pupop"></div>-->
+	</div>
+
+
+	</body>
+	<script src="__STATIC__/wap/js/html_size.js"></script>
+	<script src="__STATIC__/wap/js/jquery.min.js"></script>
+	<script src="__STATIC__/wap/js/bootstrap.min.js"></script>
+	<script src="__STATIC__/wap/js/layer/layer.js"></script>
+	<script>
+		$(document).ready(function () {
+			$("#redEnvelopes1").one("click", function() {
+				$(this).addClass("rotate");
+                setTimeout(function(){
+                    $("#redEnvelopes").removeClass("rotate").removeAttr("id");
+					$('.lzx-chai-hongbao span').html("恭喜你获得3.5元");
+				},3000)
+
+            })
+            return;
+        })
+        $('#lottery').on('click', function () {
+            layer.open({
+                content: '请前往豌豆吧APP"商城-兑换-活动抽奖"进行领奖'
+                ,btn: 'OK'
+            });
+        });
+		$('#redEnvelopes').on('click', function () {
+            window.location.href = $(this).data('url');
+        });
+	</script>
+</html>

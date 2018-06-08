@@ -1,0 +1,265 @@
+﻿{extend name="common:base" /}
+{block name='header'}
+<!-- basic styles -->
+
+<link href="__STATIC__/assets/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="__STATIC__/assets/css/font-awesome.min.css" />
+
+<!--[if IE 7]>
+<link rel="stylesheet" href="__STATIC__/assets/css/font-awesome-ie7.min.css" />
+<![endif]-->
+
+<!-- ace styles -->
+
+<link rel="stylesheet" href="__STATIC__/assets/css/ace.min.css" />
+<link rel="stylesheet" href="__STATIC__/assets/css/ace-rtl.min.css" />
+<link rel="stylesheet" href="__STATIC__/assets/css/ace-skins.min.css" />
+
+<!--[if lte IE 8]>
+<link rel="stylesheet" href="__STATIC__/assets/css/ace-ie.min.css" />
+<![endif]-->
+<link href="__STATIC__/plugins/uploadify/uploadify.css" rel="stylesheet" type="text/css" />
+<link href="__STATIC__/plugins/uploadify/common.css" rel="stylesheet" type="text/css" />
+{/block}
+{block name="content"}
+<div class="page-content">
+	<div class="row">
+		<div class="col-xs-12">
+			<form data-action="{:url('index/create')}" id="form-create" method="post" class="form-horizontal js-ajax-form margin-top-20">
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right"> 物品类型 </label>
+					<div class="col-sm-10">
+						<label>
+							<input name="type" type="radio" class="ace type" checked value="0">
+							<span class="lbl"> 实物大奖</span>
+						</label>
+						<label>
+							<input name="type" type="radio" class="ace type" value="1">
+							<span class="lbl"> 流量话费</span>
+						</label>
+						<label>
+							<input name="type" type="radio" class="ace type" value="2">
+							<span class="lbl"> 购物券</span>
+						</label>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right" for='Name'> 物品名称 </label>
+					<div class="col-sm-10">
+						<input type="text" name="Name" id="Name" placeholder="" class="col-xs-10 col-sm-5">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right" for='ShotName'> 物品简称 </label>
+					<div class="col-sm-10">
+						<input type="text" name="ShotName" id="ShotName" placeholder="" class="col-xs-10 col-sm-5">
+					</div>
+				</div>
+
+				<div class="form-group" id="batch_sn">
+					<label class="col-sm-2 control-label no-padding-right" for='batchSn'> 批次 </label>
+					<div class="col-sm-10">
+						<input type="text" name="batchSn" id="batchSn" placeholder="" class="col-xs-10 col-sm-5">
+					</div>
+					<div class="col-sm-10" id="message">
+
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right" for="Price"> 面额（元） </label>
+					<div class="col-sm-10">
+						<input type="text" id="Price" name="Price" placeholder="" class="col-xs-10 col-sm-5">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right" for="SoldPrice"> 售价（豆） </label>
+					<div class="col-sm-10">
+						<input type="text" id="SoldPrice" name="SoldPrice" placeholder="" class="col-xs-10 col-sm-5">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right" for="stock"> 库存数量 </label>
+					<div class="col-sm-10">
+						<input type="text" id="stock" name="stock" placeholder="" class="col-xs-10 col-sm-5">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right" for="status"> 状态 </label>
+					<div class="col-sm-10">
+						<select class="form-control" name="status" id="status" style="width: 42%;">
+							<option value="1">上架</option>
+							<option value="0">下架</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-2 control-label no-padding-right">上传图片</label>
+					<div class="col-md-10">
+						<div class='row'>
+							<div class="col-sm-12 col-md-4 hiduploader">
+								<div data-provides="fileinput" class="fileinput">
+									<div class="thumbnail" style="border: 0px;">
+										<img alt="上传图片" id="imgshow" width="200" height="auto" style="margin-left: 0px;" src="__STATIC__/assets/images/none.png" class="img-reponsetive">
+										<input type="file" value="" name="logo" id="upload-file">
+										<input type="hidden" name="Image" id="Image" value="">
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="col-sm-12 col-md-4">
+							建议尺寸：宽260px*高240px
+						</div>
+					</div>
+				</div>
+
+
+				<div class="clearfix">
+					<div class="col-md-offset-3 col-md-9">
+						<button class="btn btn-info" type="button">
+							<i class="icon-ok bigger-110"></i>
+							提交
+						</button>
+						&nbsp; &nbsp; &nbsp;
+						<button class="btn" type="reset">
+							<i class="icon-undo bigger-110"></i>
+							重置
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{/block}
+
+{block name='footer'}
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+<script src="__STATIC__/assets/js/jquery-2.0.3.min.js"></script>
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script src="__STATIC__/assets/js/jquery-1.10.2.min.js"></script>
+<![endif]-->
+
+<script type="text/javascript">
+    if("ontouchend" in document) document.write("<script src='__STATIC__/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script src="__STATIC__/assets/js/bootstrap.min.js"></script>
+<script src="__STATIC__/plugins/layer/layer.js"></script>
+<script type="text/javascript" src="__STATIC__/plugins/uploadify/jquery.uploadify.min.js"></script>
+{/block}
+
+{block name='script'}
+<script>
+    //上传文件
+	/* 初始化上传插件 */
+    jQuery("#upload-file").uploadify({
+        "swf"             : "__STATIC__/plugins/uploadify/uploadify.swf",
+        "fileObjName"     : "logo",
+        'cancelImg'		  : '__STATIC__/plugins/uploadify/cancel.png',
+        "buttonText"      : "上传图片",
+        "uploader"        : "{:url('File/upload')}",
+        "width"           : 200,
+        "height"          : 34,
+        'formData'        : {},
+        'removeTimeout'   : 1,
+        'onInit'		  : init,
+        'multi'			  : false,
+        "onUploadSuccess" : uploadSuccess,
+        'onFallback' : function() {
+            alert('未检测到兼容版本的Flash.');
+        }
+    });
+    function init(){
+        $('#upload-file, #upload-file-queue').css('display','inline-block');
+    }
+
+	/* 文件上传成功回调函数 */
+    function uploadSuccess(file, data){
+        data = $.parseJSON(data);
+        if(data.code == 200){
+            $('#imgshow').attr('src', data.data.filename);
+            $('#Image').val(data.data.filename);
+		}
+    }
+
+    $('#batchSn').blur(function () {
+        var batchSn = $(this).val();
+        $.ajax({
+            type : "post",
+            url  : "{:url('Publics/getBatchInfo')}",
+            data : { batchSn : batchSn},//表单数据JSON格式的函数参数里填写表单的ID或要提交的表单
+            dataType: 'json',
+            success: function(data) {
+                var html = '';
+				if(data.code == 1001){
+				    html = '<label>满' + data.data.min_price + '元减' + data.data.price +'元 ' + data.data.shopName + '</label>';
+				    $('#Price').val(data.data.price);
+				    $('.btn-info').attr('disabled', false);
+				}else {
+				    html = '<label class="red">' + data.msg + '</label>';
+                    $('.btn-info').attr('disabled', true);
+				}
+				$('#message').html(html);
+            }
+        });
+    });
+
+    $('#batch_sn').hide();
+    $('.type').change(function () {
+        var type = $("input[name='type']:checked").val();
+        $('.btn-info').attr('disabled', false);
+        if(type == 2){
+            $('#batch_sn').show();
+		}else{
+            $('#batch_sn').hide();
+		}
+    });
+
+    
+    $('.btn-info').click(function () {
+        var data = getFormJson("#form-create");
+        var url  = $('#form-create').data('action');
+        $.ajax({
+            type : "POST",
+            url  : url,
+            data : data,//表单数据JSON格式的函数参数里填写表单的ID或要提交的表单
+            dataType: 'json',
+            success: function(data) {
+				layer.alert(data.message);
+				if(data.code == 200){
+				    setTimeout(function () {
+                        window.location.href = "{:url('Index/index')}";
+                    }, 2000);
+				}
+            }
+        });
+    });
+
+    // 如：{Name:'摘取天上星',position:'IT技术'}
+    // ps:注意将同名的放在一个数组里
+    function getFormJson(form) {
+        var o = {};
+        var a = $(form).serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    }
+    
+</script>
+{/block}
+

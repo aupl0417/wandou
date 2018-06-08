@@ -1,0 +1,64 @@
+<div class="game-form-box" style="overflow: hidden">
+    <div class="row mg0 over">
+        <div class="pr0 text-left set-text line38 pull-left">
+            真实姓名
+        </div>
+        <div class="pull-left pl0" style="width: 60%">
+            <input type="text" class="form-control bor_r6" name="username" value="{$address.UserName}" placeholder="请输入您的姓名">
+            <div style="height: 0.2rem;margin-top: 3px;" class="fs14 c-f92"></div>
+        </div>
+    </div>
+    <div class="row mg0 over">
+        <div class="pr0 text-left set-text line38 pull-left">
+            手机号码
+        </div>
+        <div class="pull-left pl0" style="width: 60%">
+            <input type="number" class="form-control bor_r6" name="mobile" value="{$address.Mobile}" placeholder="请输入手机号码">
+            <div style="height: 0.2rem;margin-top: 3px;" class="fs14 c-f92"></div>
+        </div>
+    </div>
+    <div class="row mg0 over">
+        <div class="pr0 text-left set-text line38 pull-left">
+            详细地址
+        </div>
+        <div class="pull-left pl0" style="width: 60%">
+            <textarea class="form-control bor_r6 reset-textara"  name="Address" value="{$address.Address}" placeholder="例如：xx省xx市xx路xx号xx小区xx号">{$address.Address}</textarea>
+            <!--<div style="height: 25px;margin-top: 3px;" class="fs14 c-f92"></div>-->
+        </div>
+    </div>
+    <div class="row mg0 over text-center">
+        <input type="button" id="note-btn" class="mt10 textColor1 createAddress" value="保存" />
+        <!--<div class="reset-txt2 mt10">-->
+            <!--<span class="set-text" style="font-size: 0.3rem">客服电话：</span>-->
+            <!--<label class="reset-txtcolor" style="font-size: 0.3rem">020-87006011</label>-->
+            <!--&nbsp;&nbsp;-->
+            <!--<span class="ml20 set-text" style="font-size: 0.3rem">客服QQ：</span>-->
+            <!--<label class="reset-txtcolor" style="font-size: 0.3rem">3425083748</label>-->
+        <!--</div>-->
+    </div>
+</div>
+
+<script>
+    //添加地址
+    $('.createAddress').click(function () {
+        var mobile = $("input[name='mobile']").val();
+        var username = $("input[name='username']").val();
+        var Address  = $("textarea[name='Address']").val();
+
+        $.ajax({
+            type:'post',
+            data: { mobile : mobile, username : username, Address : Address},
+            url : "{:url('Address/create')}",
+            dataType:'json',
+            success:function(result){
+                $('#myModal3 .tetmoal').text(result.data);
+                $('#myModal3').modal('show');
+                /*if(result.code == 200 || result.code == 204){
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 2000);
+                }*/
+            }
+        });
+    });
+</script>

@@ -1,0 +1,86 @@
+<div class="game-form-box pt20 set-box bg1   bor_r6 pd10 top35" style="width: 85%;">
+    <!--<div class="pd10 row mg0 over" style="width:100%;text-align:center;padding-left: 200px;">
+        <div class="pr0 text-left set-text set-text2 line38">
+            订单详情
+        </div>
+    </div>-->
+    <div  class="pd10" style="border:none;outline: none;">
+        <div class="row mg0 over" >
+            <div class="pr0 text-left set-text set-text2 line38 pull-left" >
+                订&nbsp;&nbsp;单&nbsp;&nbsp;号：
+            </div>
+            <div class="pull-left pl0 line38 textColor6"  style="width: 60%">
+                {$data.ID}
+            </div>
+        </div>
+        <div class="row mg0 ">
+            <div class="pr0 text-left set-text set-text2 line38 pull-left">
+                账 &nbsp;&nbsp; 　号：
+            </div>
+            <div class="pull-left pl0 textColor1 line38"  style="width: 60%">
+                {$data.UserName}
+            </div>
+        </div>
+        <div class="row mg0 over">
+            <div class="pr0 text-left set-text set-text2 line38 pull-left">
+                物品类型：
+            </div>
+            <div class="pull-left pl0  line38"  style="width: 60%">
+                {$type[$data.Type + 1]}
+                <!--实物大奖、话费流量、抵用券-->
+            </div>
+        </div>
+        <div class="row mg0 over">
+            <div class="pr0 text-left set-text set-text2 line38 pull-left">
+                提交时间：
+            </div>
+            <div class="pull-left pl0  line38"  style="width: 60%">
+                {$data.CreateTime|date="Y-m-d H:i:s", ###}
+            </div>
+        </div>
+        {if condition='$data.Type eq 0'}
+        <div class="row mg0 over" style="outline: 0;margin-top: -1px;">
+            <div class="pr0 text-left set-text set-text2 line38 pull-left" style="outline: 0;margin-top: -1px;">
+                收货地址：
+            </div>
+            <div class="pull-left pl0 line38"  style="width: 60%">
+                {$data.Address}
+            </div>
+        </div>
+        {elseif condition='$data.Type eq 1'/}
+        <div class="row mg0 over" style="outline: 0;margin-top: -1px;">
+            <div class="pr0 text-left set-text set-text2 line38 pull-left" style="outline: 0;margin-top: -1px;">
+                手机号码：
+            </div>
+            <div class="pull-left pl0 line38"  style="width: 60%">
+                {$data.Mobile}
+            </div>
+        </div>
+        {/if}
+        <div class="row mg0 over">
+            <div class="pr0 text-left set-text set-text2 line38 pull-left" style="outline: 0;margin-top: -1px;">
+                <!--状 &nbsp;&nbsp; 态：-->
+                订单状态：
+            </div>
+            <div class="pull-left pl0 line38"  style="width: 60%">
+                {if condition='$data.Status eq 0'}
+                待处理
+                {elseif condition='$data.Status eq 1'}
+                处理成功
+                {elseif condition='$data.Status eq -1'}
+                处理失败
+                {/if}
+            </div>
+        </div>
+
+        <div class="text-center mt15" style="color: #8988d4;font-size: 0.3rem;">
+            {eq name='data.Type' value='2'}
+            请在“ 唐人街-个人中心-我的抵用券”中查看.
+            {/eq}
+        </div>
+
+    </div>
+</div>
+<div class="modal-footer text-center" style="border:none;padding: 0.2rem;">
+    <input type="button"  class="mt10 boxliBtn2 textColor1" value="关闭"  data-dismiss="modal"/>
+</div>

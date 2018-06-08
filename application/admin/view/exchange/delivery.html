@@ -1,0 +1,72 @@
+﻿{extend name="common:base" /}
+
+{block name="content"}
+<div class="page-content">
+	<div class="row">
+		<div class="col-xs-12">
+			<form data-action="{:url('Exchange/deliveryPost')}" id="form-delivery" class="form-horizontal js-ajax-form margin-top-20">
+				<input type="hidden" name="id" value="{$id}">
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right" for='DeliveryName'> 物流公司： </label>
+					<div class="col-sm-10">
+						<input type="text" name="DeliveryName" id="DeliveryName" placeholder="" class="col-xs-10 col-sm-5">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right" for='DeliveryNum'> 物流单号： </label>
+					<div class="col-sm-10">
+						<input type="text" name="DeliveryNum" id="DeliveryNum" placeholder="" class="col-xs-10 col-sm-5">
+					</div>
+				</div>
+
+				<div class="clearfix">
+					<div class="col-md-offset-3 col-md-9">
+						<button class="btn btn-info" type="button">
+							<i class="icon-ok bigger-110"></i>
+							提交
+						</button>
+						&nbsp; &nbsp; &nbsp;
+						<a class="btn" id="back">
+							<i class="icon-undo bigger-110"></i>
+							返回
+						</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{/block}
+
+{block name='script'}
+<script>
+	$(function(){
+	    $('.btn-info').on('click', function(){
+            var url = $('#form-delivery').data('action');
+            var id           = $("input[name='id']").val();
+            var DeliveryName = $("input[name='DeliveryName']").val();
+            var DeliveryNum  = $("input[name='DeliveryNum']").val();
+            var data = { DeliveryName : DeliveryName, DeliveryNum : DeliveryNum, id : id };
+            $.ajax({
+                type:'post',
+                url : url,
+				data : data,
+                dataType:'json',
+                success:function(data){
+                    layer.alert(data.message);
+                    if(data.code == 200){
+                        setTimeout(function () {
+                            window.location.href = "{:url('Exchange/index')}";
+                        }, 2000);
+                    }
+                }
+            });
+		});
+	})
+	$('#back').click(function () {
+		window.history.back();
+    });
+</script>
+{/block}
+

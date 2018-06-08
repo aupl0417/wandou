@@ -1,0 +1,64 @@
+<div id="">
+    <table border="0" cellspacing="0" cellpadding="0" class="boxsp">
+
+        <thead>
+        <tr class="tableTitle">
+            <th width="65%">
+                <!--商品信息-->
+                <img src="__STATIC__/wap/images/shopXinxi.png" alt="" style="width: 2rem"/>
+            </th>
+            <th width="20%">
+                <!--状态-->
+                <img src="__STATIC__/wap/images/zhuangtai.png" style="width: 1rem"/>
+            </th>
+            <th>
+                <!--详细-->
+                <img src="__STATIC__/wap/images/detail.png" style="width: 1rem"/>
+            </th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<div class="tableBoxcontent">
+    <table border="0" cellspacing="0" cellpadding="0" class="boxsp">
+        <tbody class="">
+        {foreach $records as $vo}
+        <tr class="tabletr" valign="middle" data-url="{:url('Exchange/detail', ['id' => $vo.ID])}">
+            <td class="tableTd1" width="65%">
+                <div>
+                    <div class="pull-left">
+                        <img src="{$vo.Image|default='__STATIC__/wap/images/shophone.png'}" class="Tdimg1" />
+                    </div>
+                    <div class="pull-left tableTd1-2">
+                        <div class="wdshenlie" style="height: 0.7rem;line-height: 0.7rem">{$vo.GoodsName}</div>
+                        <div class="pull-left c-9c6 fs14 mt10">{$vo.CreateTime|date='Y-m-d H:i:s', ###}</div>
+                    </div>
+                </div>
+            </td>
+
+            {if condition='$vo.Status eq 0'}
+            <td align="center" class="textColor1">待处理</td>
+            {elseif condition='$vo.Status eq 1'}
+            <td align="center" width="20%">成功</td>
+            {elseif condition='$vo.Status eq -1'}
+            <td align="center" class="textColor2">失败</td>
+            {/if}
+            <td align="center">
+                <img src="__STATIC__/wap/images/jiantou.png" height="20px"/>
+            </td>
+        </tr>
+        {/foreach}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    //兑换记录详细
+    $(".tabletr").click(function(){
+        var url = $(this).data('url');
+        $.post(url, function (html) {
+            $('#detail-modal').html(html);
+            $('#myModal').modal('show');
+        });
+    });
+</script>
